@@ -12,18 +12,22 @@
         body { font-family: 'Inter', sans-serif; }
         .hero-gradient { background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); }
         input[type="radio"]:checked + label {
-            border-color: #2563eb; /* blue-600 */
-            background-color: #eff6ff; /* blue-50 */
+            border-color: #2563eb;
+            background-color: #eff6ff;
             box-shadow: 0 0 0 2px #3b82f6;
+        }
+        .step-icon {
+            background-color: #DBEAFE; /* blue-100 */
+            color: #1D4ED8; /* blue-700 */
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-50 text-gray-800">
 
     <!-- Header / Hero Section -->
-    <header class="hero-gradient text-white text-center py-16 sm:py-24 shadow-lg">
+    <header class="hero-gradient text-white text-center py-20 sm:py-28 shadow-lg">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">AI-Powered Stock Forecasting</h1>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">AI-Powered Stock Forecasting</h1>
             <p class="mt-4 text-lg sm:text-xl max-w-3xl mx-auto text-blue-100">
                 Leverage advanced Machine Learning models to analyze historical stock data and forecast future trends.
             </p>
@@ -32,86 +36,101 @@
 
     <!-- Main Content -->
     <main class="container mx-auto p-4 -mt-16">
-        <div class="w-full max-w-3xl mx-auto">
-            <div class="bg-white rounded-xl shadow-2xl p-6 sm:p-10">
+        <div class="w-full max-w-5xl mx-auto space-y-12">
+
+            <!-- How It Works Section -->
+            <section class="bg-white rounded-xl shadow-xl p-8 sm:p-10">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">The Machine Learning Pipeline</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center">
+                        <div class="step-icon w-16 h-16 rounded-full flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg></div>
+                        <h3 class="font-semibold text-lg">1. Data Collection</h3>
+                        <p class="text-sm text-gray-600 mt-1">Fetches 15 years of real-time data from Yahoo Finance.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center">
+                        <div class="step-icon w-16 h-16 rounded-full flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3" /></svg></div>
+                        <h3 class="font-semibold text-lg">2. Feature Engineering</h3>
+                        <p class="text-sm text-gray-600 mt-1">Calculates SMA, RSI, Volatility, and stable Log Returns.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center">
+                        <div class="step-icon w-16 h-16 rounded-full flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2 1M4 7l2-1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5" /></svg></div>
+                        <h3 class="font-semibold text-lg">3. Model Training</h3>
+                        <p class="text-sm text-gray-600 mt-1">Trains the selected model (LSTM or RF) on 80% of the data.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="flex flex-col items-center">
+                        <div class="step-icon w-16 h-16 rounded-full flex items-center justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg></div>
+                        <h3 class="font-semibold text-lg">4. Forecasting</h3>
+                        <p class="text-sm text-gray-600 mt-1">Iteratively predicts future price changes day-by-day.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Model Explanations Section -->
+            <section>
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Understanding the Models</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl shadow-xl p-8">
+                        <h3 class="text-xl font-bold mb-3">LSTM (Long Short-Term Memory)</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">An advanced neural network ideal for sequential data. LSTM models have a "memory," allowing them to learn from long-term historical patterns and trends. This makes them powerful for capturing complex market dynamics but requires more time to train.</p>
+                        <ul class="mt-4 text-sm space-y-2">
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Potentially higher accuracy</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Excellent for complex trends</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Slower training time</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-xl p-8">
+                        <h3 class="text-xl font-bold mb-3">Random Forest Regressor</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">An ensemble model that works by building a multitude of simple decision trees. It leverages the "wisdom of the crowd" by averaging their outputs. This makes it extremely fast and robust against noise, providing a great baseline for trend direction.</p>
+                        <ul class="mt-4 text-sm space-y-2">
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Very fast training & prediction</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Excellent for quick trend analysis</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>May not capture deep sequential patterns</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forecasting Tool Section -->
+            <section id="tool" class="bg-white rounded-xl shadow-xl p-8 sm:p-10">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Generate Your Forecast</h2>
                 <form id="prediction-form" action="/predict" method="post">
-                    <div class="space-y-8">
-
-                        <!-- Step 1: Model Type Selection -->
+                    <!-- Form content is the same as the last version -->
+                    <div class="space-y-8 max-w-xl mx-auto">
                         <div>
-                            <div class="flex items-center space-x-3 mb-4">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</span>
-                                <h2 class="text-xl font-bold text-gray-800">Choose Your Model</h2>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="relative">
-                                    <input type="radio" id="model_lstm" name="model_type" value="lstm" class="hidden peer" checked>
-                                    <label for="model_lstm" class="block w-full cursor-pointer p-5 border border-gray-200 rounded-lg text-left transition duration-200 peer-checked:border-blue-600 peer-checked:bg-blue-50">
-                                        <div class="flex items-center space-x-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                            <div>
-                                                <span class="font-semibold text-gray-900 block">LSTM Network</span>
-                                                <span class="text-sm text-gray-500">Deep Learning for Accuracy</span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="relative">
-                                    <input type="radio" id="model_rf" name="model_type" value="rf" class="hidden peer">
-                                    <label for="model_rf" class="block w-full cursor-pointer p-5 border border-gray-200 rounded-lg text-left transition duration-200 peer-checked:border-blue-600 peer-checked:bg-blue-50">
-                                        <div class="flex items-center space-x-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                                            <div>
-                                                <span class="font-semibold text-gray-900 block">Random Forest</span>
-                                                <span class="text-sm text-gray-500">Ensemble Model for Speed</span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
+                            <div class="flex items-center space-x-3 mb-4"><span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</span><h2 class="text-lg font-bold text-gray-800">Choose Model</h2></div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="relative"><input type="radio" id="model_lstm" name="model_type" value="lstm" class="hidden peer" checked><label for="model_lstm" class="block w-full cursor-pointer p-4 border border-gray-200 rounded-lg text-center transition peer-checked:border-blue-600 peer-checked:bg-blue-50"><span class="font-semibold text-gray-900 block">LSTM Network</span></label></div><div class="relative"><input type="radio" id="model_rf" name="model_type" value="rf" class="hidden peer"><label for="model_rf" class="block w-full cursor-pointer p-4 border border-gray-200 rounded-lg text-center transition peer-checked:border-blue-600 peer-checked:bg-blue-50"><span class="font-semibold text-gray-900 block">Random Forest</span></label></div></div>
                         </div>
-
-                        <!-- Step 2: Stock Selection -->
                         <div>
-                            <div class="flex items-center space-x-3 mb-4">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</span>
-                                <h2 class="text-xl font-bold text-gray-800">Select Your Stock</h2>
-                            </div>
-                            <select id="ticker_select" name="ticker_select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3">
-                                <!-- Options will be inserted here by JavaScript -->
-                            </select>
+                            <div class="flex items-center space-x-3 mb-4"><span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</span><h2 class="text-lg font-bold text-gray-800">Select Stock</h2></div>
+                            <select id="ticker_select" name="ticker_select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"></select>
                             <div class="flex items-center text-center my-4"><div class="flex-grow border-t border-gray-200"></div><span class="flex-shrink mx-4 text-xs font-semibold text-gray-400 uppercase">OR</span><div class="flex-grow border-t border-gray-200"></div></div>
                             <input type="text" id="ticker_input" name="ticker_input" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3" placeholder="Enter New Ticker (e.g., AAPL, ITC.NS)">
                         </div>
-
-                        <!-- Step 3: Days to Predict Slider -->
                         <div>
-                           <div class="flex items-center space-x-3 mb-4">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">3</span>
-                                <h2 class="text-xl font-bold text-gray-800">Set Forecast Horizon</h2>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <input type="range" id="predict_days" name="predict_days" min="1" max="60" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
-                                <span id="slider-value" class="font-bold text-lg text-blue-700 w-12 text-center">30</span>
-                                <span class="text-gray-600">days</span>
-                            </div>
+                           <div class="flex items-center space-x-3 mb-4"><span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">3</span><h2 class="text-lg font-bold text-gray-800">Set Forecast Horizon</h2></div>
+                            <div class="flex items-center space-x-4"><input type="range" id="predict_days" name="predict_days" min="1" max="60" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"><span id="slider-value" class="font-bold text-lg text-blue-700 w-12 text-center">30</span><span class="text-gray-600">days</span></div>
                         </div>
                     </div>
-
-                    <div class="mt-10">
-                        <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-base px-5 py-3.5 text-center shadow-lg hover:shadow-xl transition duration-300">
-                            Generate Analysis
-                        </button>
+                    <div class="mt-10 max-w-xl mx-auto">
+                        <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-base px-5 py-3.5 text-center shadow-lg hover:shadow-xl transition duration-300">Generate Analysis</button>
                     </div>
                 </form>
-            </div>
+            </section>
         </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="text-center py-8 mt-12">
+        <p class="text-sm text-gray-500">&copy; 2025 AI Forecasting Project - Shayan Ahmad. All Rights Reserved.</p>
+        <p class="text-xs text-gray-400 mt-2">This is a demonstration project for educational purposes. Not financial advice.</p>
+    </footer>
+
     <!-- Loading Overlay -->
-    <div id="loading-overlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-50">
-        <div class="text-center text-white"><svg class="animate-spin h-10 w-10 text-white mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="text-xl font-semibold">Generating Forecast...</p><p class="text-sm text-blue-200">This can take a moment, especially for new stocks.</p></div>
-    </div>
+    <div id="loading-overlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-50"><div class="text-center text-white"><svg class="animate-spin h-10 w-10 text-white mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="text-xl font-semibold">Generating Forecast...</p><p class="text-sm text-blue-200">This can take a moment, especially for new stocks.</p></div></div>
 
     <script>
         // All JavaScript logic from the previous version remains the same.

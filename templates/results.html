@@ -14,38 +14,62 @@
 <body class="bg-gray-100">
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         {% if error %}
-            <div class="bg-white rounded-xl shadow-lg p-8 text-center">
-                <h1 class="text-2xl font-bold text-red-600">Analysis Failed</h1>
-                <p class="text-gray-600 mt-2">{{ error }}</p>
-                <a href="/" class="mt-6 inline-block text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-5 py-2.5 transition duration-200">&larr; Try Again</a>
-            </div>
+            <div class="bg-white rounded-xl shadow-lg p-8 text-center"><h1 class="text-2xl font-bold text-red-600">Analysis Failed</h1><p class="text-gray-600 mt-2">{{ error }}</p><a href="/" class="mt-6 inline-block text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-5 py-2.5 transition">&larr; Try Again</a></div>
         {% else %}
             <!-- Main Title Section -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-900">
-                        Analysis Dashboard: <span class="text-blue-600">{{ ticker }}</span>
-                        <span class="ml-2 text-sm font-semibold text-white bg-gray-700 rounded-full px-3 py-1 align-middle">{{ model_type.upper() }}</span>
-                    </h1>
-                </div>
-                <a href="/" class="mt-4 sm:mt-0 whitespace-nowrap text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 transition duration-200">&larr; Analyze Another</a>
+                <div><h1 class="text-3xl font-bold text-gray-900">Analysis Dashboard: <span class="text-blue-600">{{ ticker }}</span><span class="ml-3 text-sm font-semibold text-white bg-gray-700 rounded-full px-3 py-1 align-middle">{{ model_type.upper() }}</span></h1></div>
+                <a href="/" class="mt-4 sm:mt-0 whitespace-nowrap text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 transition">&larr; Analyze Another</a>
             </div>
 
-            <!-- Summary Cards Section -->
+            <!-- Summary Cards Section - UPDATED to 4-column layout -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <div class="bg-white p-5 rounded-xl shadow"><h3 class="text-sm font-medium text-gray-500">Current Price</h3><p class="text-2xl font-semibold text-gray-900 mt-1"><span class="text-gray-400">{{ currency }}</span>{{ current_rate }}</p><p class="text-xs text-gray-400 mt-1">Last available closing price</p></div>
-                <div class="bg-white p-5 rounded-xl shadow"><h3 class="text-sm font-medium text-gray-500">Predicted Next Day Price</h3><p class="text-2xl font-semibold text-gray-900 mt-1"><span class="text-gray-400">{{ currency }}</span>{{ predicted_rate }}</p><p class="text-xs text-gray-400 mt-1">{{ model_type.upper() }} model forecast</p></div>
-                <div class="bg-white p-5 rounded-xl shadow"><h3 class="text-sm font-medium text-gray-500">Predicted Price in {{ predict_days }} Days</h3><p class="text-2xl font-semibold text-gray-900 mt-1"><span class="text-gray-400">{{ currency }}</span>{{ final_predicted_rate }}</p><p class="text-xs text-gray-400 mt-1">Forecast for {{ final_predicted_date }}</p></div>
-                <div class="bg-white p-5 rounded-xl shadow"><h3 class="text-sm font-medium text-gray-500">Annualized Volatility</h3><p class="text-2xl font-semibold text-gray-900 mt-1">{{ volatility }}</p><p class="text-xs text-gray-400 mt-1">Based on 30-day rolling returns</p></div>
+                <!-- Card 1: Current Price -->
+                <div class="bg-white p-5 rounded-xl shadow">
+                    <h3 class="text-sm font-medium text-gray-500">CURRENT PRICE</h3>
+                    <p class="text-3xl font-semibold text-gray-900 mt-1"><span class="text-gray-400">{{ currency }}</span>{{ current_rate }}</p>
+                    <p class="text-xs text-gray-400 mt-1">Last available closing price</p>
+                </div>
+
+                <!-- Card 2: Predicted Next Day Price (RESTORED) -->
+                <div class="bg-white p-5 rounded-xl shadow">
+                    <h3 class="text-sm font-medium text-gray-500">NEXT DAY FORECAST</h3>
+                    <p class="text-3xl font-semibold text-gray-900 mt-1"><span class="text-gray-400">{{ currency }}</span>{{ predicted_rate }}</p>
+                     <p class="text-xs text-gray-400 mt-1">{{ model_type.upper() }} model forecast</p>
+                </div>
+                <!-- Card 3: Forecast Gain/Loss -->
+                 <div class="bg-white p-5 rounded-xl shadow">
+                    <h3 class="text-sm font-medium text-gray-500">FORECAST GAIN/LOSS</h3>
+                    {% if trend == 'Bullish' %}
+                        <p class="text-3xl font-semibold text-green-600 mt-1 flex items-center">
+                            {{ percent_change }}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </p>
+                    {% else %}
+                         <p class="text-3xl font-semibold text-red-600 mt-1 flex items-center">
+                            {{ percent_change }}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                         </p>
+                    {% endif %}
+                    <p class="text-xs text-gray-400 mt-1">Over {{ predict_days }} days</p>
+                </div>
+
+
+                <!-- Card 4: Predicted Future Price -->
+                <div class="bg-white p-5 rounded-xl shadow">
+                    <h3 class="text-sm font-medium text-gray-500">FINAL FORECAST PRICE</h3>
+                    <p class="text-3xl font-semibold text-gray-900 mt-1"><span class="text-gray-400">{{ currency }}</span>{{ final_predicted_rate }}</p>
+                    <p class="text-xs text-gray-400 mt-1">Prediction for {{ final_predicted_date }}</p>
+                </div>
             </div>
 
             <!-- Model Performance Section -->
-             <div class="bg-white p-6 rounded-xl shadow mb-6">
+            <div class="bg-white p-6 rounded-xl shadow mb-6">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Model Performance (on Test Data)</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <div><h3 class="text-sm font-medium text-gray-500">R-SQUARED (R²)</h3><p class="text-3xl font-semibold text-blue-600 mt-1">{{ r2 }}</p><p class="text-xs text-gray-400 mt-1">Proportion of variance explained</p></div>
-                    <div><h3 class="text-sm font-medium text-gray-500">ROOT MEAN SQUARED ERROR (RMSE)</h3><p class="text-3xl font-semibold text-blue-600 mt-1">{{ rmse }}</p><p class="text-xs text-gray-400 mt-1">Standard deviation of errors</p></div>
-                    <div><h3 class="text-sm font-medium text-gray-500">MEAN ABSOLUTE ERROR (MAE)</h3><p class="text-3xl font-semibold text-blue-600 mt-1">{{ mae }}</p><p class="text-xs text-gray-400 mt-1">Average prediction error</p></div>
+                    <div><h3 class="text-sm font-medium text-gray-500">R-SQUARED (R²)</h3><p class="text-3xl font-semibold text-blue-600 mt-1">{{ r2 }}</p></div>
+                    <div><h3 class="text-sm font-medium text-gray-500">ROOT MEAN SQUARED ERROR (RMSE)</h3><p class="text-3xl font-semibold text-blue-600 mt-1">{{ rmse }}</p></div>
+                    <div><h3 class="text-sm font-medium text-gray-500">MEAN ABSOLUTE ERROR (MAE)</h3><p class="text-3xl font-semibold text-blue-600 mt-1">{{ mae }}</p></div>
                 </div>
             </div>
 
@@ -56,29 +80,26 @@
                 <div class="bg-white p-2 sm:p-4 rounded-xl shadow"><div id="volumeChart"></div></div>
             </div>
 
-            <!-- NEW: Disclaimer Section -->
-            <div class="mt-8 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg p-5 text-center">
-                <div class="flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <h3 class="font-bold">Disclaimer: For Educational Purposes Only</h3>
-                </div>
-                <p class="text-sm mt-2">
-                    This forecast is generated by a machine learning model based solely on historical price data. It does not consider external factors such as market news, economic indicators, or company fundamentals. This tool should not be used as financial advice. Always conduct your own research before making any investment decisions.
-                </p>
-            </div>
+            <!-- Disclaimer Section -->
+            <div class="mt-8 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg p-5 text-center"><div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg><h3 class="font-bold">Disclaimer: For Educational Purposes Only</h3></div><p class="text-sm mt-2">This forecast is generated by a machine learning model based solely on historical price data and does not consider external factors such as market news, economic indicators, or company fundamentals. This tool should not be used as financial advice. Always conduct your own research before making any investment decisions.</p></div>
         {% endif %}
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            try {
-                const graphPriceData = {{ graph_price_json|safe }};
-                const graphRsiData = {{ graph_rsi_json|safe }};
-                const graphVolData = {{ graph_vol_json|safe }};
-                Plotly.newPlot('priceChart', graphPriceData.data, graphPriceData.layout, {responsive: true});
-                Plotly.newPlot('rsiChart', graphRsiData.data, graphRsiData.layout, {responsive: true});
-                Plotly.newPlot('volumeChart', graphVolData.data, graphVolData.layout, {responsive: true});
-            } catch (e) { console.error("Error rendering Plotly graphs:", e); }
+            const priceChartDiv = document.getElementById('priceChart');
+            if (priceChartDiv) {
+                try {
+                    const graphPriceData = {{ graph_price_json|safe }};
+                    const graphRsiData = {{ graph_rsi_json|safe }};
+                    const graphVolData = {{ graph_vol_json|safe }};
+                    Plotly.newPlot('priceChart', graphPriceData.data, graphPriceData.layout, {responsive: true});
+                    Plotly.newPlot('rsiChart', graphRsiData.data, graphRsiData.layout, {responsive: true});
+                    Plotly.newPlot('volumeChart', graphVolData.data, graphVolData.layout, {responsive: true});
+                } catch (e) {
+                    console.error("Error rendering Plotly graphs:", e);
+                }
+            }
         });
     </script>
 </body>
